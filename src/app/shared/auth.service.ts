@@ -10,6 +10,7 @@ import {
 import { Router } from '@angular/router';
 import { course } from './course';
 import { lesson } from './lesson';
+import { video } from './video';
 @Injectable({
   providedIn: 'root',
 })
@@ -77,7 +78,7 @@ export class AuthService {
       const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
       return this.http.delete<course>(this.endpoint + 'Course/api/v1/delete/' + id, httpOptions);
     }
-      // lesson
+        // lesson
   getLessonList(): Observable<lesson[]> {
     return this.http.get<lesson[]>(this.endpoint + 'Lesson/api/v1/getAll?page=1&pageSize=5&sortDirection=ascending');
   }
@@ -99,7 +100,28 @@ export class AuthService {
   getAllCourseNames(): Observable<any[]> {
     return this.http.get<any[]>(this.endpoint + 'lesson/GetAllCourseNames');
   }
-
+  // Video
+   getVideoList(): Observable<video[]> {
+        return this.http.get<video[]>(this.endpoint + 'Video/api/v1/getAll?page=1&pageSize=5&sortDirection=ascending');
+      }
+    
+      addVideo(video: any): Observable<video> {
+        const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        return this.http.post<video>(this.endpoint + 'Video/api/v1/create', video, httpOptions);
+      }
+    
+      updateVideo(id:any,video: any): Observable<video> {
+        const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        return this.http.put<video>(this.endpoint + 'Video/api/v1/update'+ id, video, httpOptions);
+      }
+    
+      deleteVideo(id: number): Observable<video> {
+        const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        return this.http.delete<video>(this.endpoint + 'Video/api/v1/delete/' + id, httpOptions);
+      }
+      getAllLessoNames(): Observable<any[]> {
+        return this.http.get<any[]>(this.endpoint + 'lesson/GetAllLessonNames');
+      }
   // Error
   handleError(error: HttpErrorResponse) {
     let msg = '';

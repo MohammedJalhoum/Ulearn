@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/shared/auth.service';
+import { video } from 'src/app/shared/video';
 
 @Component({
   selector: 'app-show-video',
@@ -7,9 +9,47 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShowVideoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: AuthService) { }
+  VideoList: video[]=[];
+  ModalTitle = "";
+  ActivateAddEditVideoComp: boolean = false;
+  video: any;
 
   ngOnInit(): void {
+    this.refreshVideoList();
+  }
+  addClick() {
+    this.video = {
+      VideoId:0,
+      VideoName:"",
+      Description:"",
+      Url:"",
+      LessonId:""
+    }
+    this.ModalTitle = "Add Video";
+    this.ActivateAddEditVideoComp = true;
+  }
+  editClick(item: any) {
+    this.video = item;
+    this.ModalTitle = "Edit Video";
+    this.ActivateAddEditVideoComp = true;
+  }
+  deleteClick(item: any) {
+    if (confirm('Are you sure??')) {
+      this.service.deleteVideo(item.VideoId).subscribe(data => {
+        alert(data.toString());
+        this.refreshVideoList();
+      })
+    }
+  }
+  closeClick() {
+    this.ActivateAddEditVideoComp = false;
+    this.refreshVideoList();
+  }
+  refreshVideoList() {
+    this.service.getVideoList().subscribe(data => {
+      this.VideoList = data;
+    });
   }
 
 }
