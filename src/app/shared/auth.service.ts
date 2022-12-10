@@ -21,13 +21,13 @@ export class AuthService {
   constructor(private http: HttpClient, public router: Router) {}
   // Sign-up
   signUp(user: User): Observable<any> {
-    let api = `${this.endpoint}/signUp`;
+    let api = `${this.endpoint}signUp`;
     return this.http.post(api, user).pipe(catchError(this.handleError));
   }
   // Sign-in
   signIn(user: User) {
     return this.http
-      .post<any>(`${this.endpoint}/login`, user)
+      .post<any>(`${this.endpoint}login`, user)
       .subscribe((res: any) => {
         localStorage.setItem('access_token', res.token);
         this.getUserProfile(res._id).subscribe((res) => {

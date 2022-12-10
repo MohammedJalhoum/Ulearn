@@ -8,6 +8,16 @@
           <button routerLink="course" class="m-1 btn btn-light btn-outline-primary" Button>Courses</button>
         </li>
       </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <button routerLink="lesson" class="m-1 btn btn-light btn-outline-primary" Button>Lessons</button>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <button routerLink="video" class="m-1 btn btn-light btn-outline-primary" Button>Videos</button>
+        </li>
+      </ul>
   </nav>
   <a *ngIf="!this.authService.isLoggedIn" class="btn btn-outline-primary" routerLinkActive="active"
     routerLinkActive="active" routerLink="/sign-up">Sign up</a>

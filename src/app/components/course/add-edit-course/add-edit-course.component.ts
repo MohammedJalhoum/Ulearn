@@ -30,7 +30,7 @@ export class AddEditCourseComponent implements OnInit {
       CourseId: this.CourseId,
       CourseName: this.CourseName
     };
-    this.service.updateCourse(course).subscribe(res => {
+    this.service.updateCourse(this.CourseId,this.CourseName).subscribe(res => {
       alert(res.toString());
     });
   }
