@@ -1,0 +1,29 @@
+<div class="d-flex flex-row bd-highlight mb-3">
+    <div class="p-2 w-50 bd-highlight">
+      <div class="input-group mb-3">
+        <span class="input-group-text">Name</span>
+        <input type="text" class="form-control" [(ngModel)]="LessonName">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text">Course</span>
+        <select class="form-select" [(ngModel)]="Course">
+          <option>--Select--</option>
+          <option *ngFor="let course of CourseList">
+            {{course.name}}
+          </option>
+        </select>
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text">Id</span>
+        <input type="date" class="form-control" [(ngModel)]="Id">
+      </div>
+    </div>
+
+  </div>
+  <button type="button" (click)="addLesson()" *ngIf="lesson.LessonId=='0'" class="btn btn-primary">
+    Create
+  </button>
+  
+  <button type="button" (click)="updateLesson()" *ngIf="lesson.LessonId!='0'" class="btn btn-primary">
+    Update
+  </button>
